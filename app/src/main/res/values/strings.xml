@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BaseDatoLocal</string>
+
+    <string-array name="tipos">
+        <item>Perro</item>
+        <item>Gato</item>
+        <item>Conejo</item>
+        <item>Serpiente</item>
+        <item>Ave</item>
+    </string-array>
+</resources>
