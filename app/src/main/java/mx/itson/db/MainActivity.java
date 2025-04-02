@@ -46,9 +46,15 @@ public class MainActivity extends AppCompatActivity implements MascotaAdapter.On
                 String nombre = edNombre.getText().toString();
                 String tipo = spSpinner.getSelectedItem().toString();
 
-                Mascota mascota = new Mascota(nombre, tipo);
-                Mascota.save(mascota);
-
+                if(editElement != null) {
+                   editElement.setNombre(nombre);
+                   editElement.setTipo(tipo);
+                   Mascota.edit(editElement);
+                   editElement = null;
+                }else {
+                    Mascota mascota = new Mascota(nombre, tipo);
+                    Mascota.save(mascota);
+                }
                 edNombre.setText("");
                 spSpinner.setSelection(0, true);
 
@@ -97,7 +103,17 @@ public class MainActivity extends AppCompatActivity implements MascotaAdapter.On
     }
 
     private void fillDataToEdit() {
-        
+        edNombre.setText( this.editElement.getNombre() );
+        int posicionTipo = -1;
+        String[] tipos = getResources().getStringArray(R.array.tipos);
+        for (int i = 0; i < tipos.length; i++) {
+            if(tipos[i].equals(this.editElement.getTipo())) {
+                posicionTipo = i;
+                break;
+            }
+        }
+        if(posicionTipo != -1)
+            spSpinner.setSelection(posicionTipo, true);
     }
 
     private Mascota editElement;
